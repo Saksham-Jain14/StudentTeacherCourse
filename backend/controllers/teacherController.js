@@ -1,0 +1,1 @@
+const T=require("../models/Teacher");exports.createTeacher=async(r,s)=>s.json(await T.create(r.body));exports.getTeachers=async(r,s)=>s.json(await T.find());exports.updateTeacher=async(r,s)=>s.json(await T.findByIdAndUpdate(r.params.id,r.body,{new:true}));exports.deleteTeacher=async(r,s)=>{await T.findByIdAndDelete(r.params.id);s.json({message:"deleted"})};

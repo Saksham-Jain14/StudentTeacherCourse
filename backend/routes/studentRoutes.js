@@ -1,0 +1,1 @@
+const r=require("express").Router();const c=require("../controllers/studentController");r.post("/",c.createStudent);r.get("/",c.getStudents);r.put("/:id",c.updateStudent);r.delete("/:id",c.deleteStudent);module.exports=r;

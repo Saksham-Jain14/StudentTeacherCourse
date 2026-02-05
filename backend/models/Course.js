@@ -1,0 +1,1 @@
+const mongoose=require("mongoose");module.exports=mongoose.model("Course",new mongoose.Schema({title:String,description:String,teachers:[{type:mongoose.Schema.Types.ObjectId,ref:"Teacher"}],students:[{type:mongoose.Schema.Types.ObjectId,ref:"Student"}]}));
