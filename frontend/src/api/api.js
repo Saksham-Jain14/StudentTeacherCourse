@@ -1,34 +1,36 @@
 // src/api/api.js
+import axios from "axios";
 
-const BASE_URL = "https://student-teacher-backend-1pi7.onrender.com";
+const API = axios.create({
+  baseURL: "https://student-teacher-backend-1pi7.onrender.com",
+});
 
-// 🔹 Fetch all students
-export const fetchStudents = async () => {
-  const response = await fetch(`${BASE_URL}/students`);
-  return response.json();
+// Students
+export const getStudents = () => API.get("/students");
+export const addStudent = (data) => API.post("/students", data);
+
+// Teachers
+export const getTeachers = () => API.get("/teachers");
+export const addTeacher = (data) => API.post("/teachers", data);
+
+// Courses
+export const getCourses = () => API.get("/courses");
+export const addCourse = (data) => API.post("/courses", data);
+
+// Mapping
+export const getCourseStudents = () => API.get("/courses-students");
+export const getCourseTeachers = () => API.get("/courses-teachers");
+
+// ✅ Default export is required because your pages use `import api from "../api/api"`
+export default {
+  getStudents,
+  addStudent,
+  getTeachers,
+  addTeacher,
+  getCourses,
+  addCourse,
+  getCourseStudents,
+  getCourseTeachers,
 };
 
-// 🔹 Fetch all teachers
-export const fetchTeachers = async () => {
-  const response = await fetch(`${BASE_URL}/teachers`);
-  return response.json();
-};
-
-// 🔹 Fetch all courses
-export const fetchCourses = async () => {
-  const response = await fetch(`${BASE_URL}/courses`);
-  return response.json();
-};
-
-// 🔹 Fetch course → teachers mapping
-export const fetchCourseTeachers = async () => {
-  const response = await fetch(`${BASE_URL}/courses-teachers`);
-  return response.json();
-};
-
-// 🔹 Fetch course → students mapping
-export const fetchCourseStudents = async () => {
-  const response = await fetch(`${BASE_URL}/courses-students`);
-  return response.json();
-};
 
