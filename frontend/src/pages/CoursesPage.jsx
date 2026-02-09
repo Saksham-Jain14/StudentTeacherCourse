@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from "react";
-import api from "../api/api";
+import { getCourses, addCourse } from "../api/api";
 
 function CoursesPage() {
   const [courses, setCourses] = useState([]);
   const [name, setName] = useState("");
 
-  const fetchCourses = async () => {
-    const res = await api.get("/courses");
-    setCourses(res.data);
+  const loadData = async () => {
+    const data = await getCourses();
+    setCourses(data);
   };
 
-  const addCourse = async () => {
-    await api.post("/courses", { name });
+  const handleAdd = async () => {
+    await addCourse(name);
     setName("");
-    fetchCourses();
+    loadData();
   };
 
   useEffect(() => {
-    fetchCourses();
+    loadData();
   }, []);
 
   return (
     <div>
       <h2>Courses</h2>
 
-      <input 
+      <input
         placeholder="Course Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button onClick={addCourse}>Add Course</button>
+      <button onClick={handleAdd}>Add Course</button>
 
       <ul>
         {courses.map((c) => (
@@ -41,3 +41,4 @@ function CoursesPage() {
 }
 
 export default CoursesPage;
+

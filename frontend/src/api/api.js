@@ -1,36 +1,46 @@
-// src/api/api.js
-import axios from "axios";
+const BASE_URL = "https://student-teacher-backend-1pi7.onrender.com";
 
-const API = axios.create({
-  baseURL: "https://student-teacher-backend-1pi7.onrender.com",
-});
+// -------- STUDENTS --------
+export const getStudents = () =>
+  fetch(`${BASE_URL}/students`).then((res) => res.json());
 
-// Students
-export const getStudents = () => API.get("/students");
-export const addStudent = (data) => API.post("/students", data);
+export const addStudent = (name) =>
+  fetch(`${BASE_URL}/students`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name }),
+  });
 
-// Teachers
-export const getTeachers = () => API.get("/teachers");
-export const addTeacher = (data) => API.post("/teachers", data);
+// -------- TEACHERS --------
+export const getTeachers = () =>
+  fetch(`${BASE_URL}/teachers`).then((res) => res.json());
 
-// Courses
-export const getCourses = () => API.get("/courses");
-export const addCourse = (data) => API.post("/courses", data);
+export const addTeacher = (name) =>
+  fetch(`${BASE_URL}/teachers`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name }),
+  });
 
-// Mapping
-export const getCourseStudents = () => API.get("/courses-students");
-export const getCourseTeachers = () => API.get("/courses-teachers");
+// -------- COURSES --------
+export const getCourses = () =>
+  fetch(`${BASE_URL}/courses`).then((res) => res.json());
 
-// ✅ Default export is required because your pages use `import api from "../api/api"`
-export default {
-  getStudents,
-  addStudent,
-  getTeachers,
-  addTeacher,
-  getCourses,
-  addCourse,
-  getCourseStudents,
-  getCourseTeachers,
-};
+export const addCourse = (name) =>
+  fetch(`${BASE_URL}/courses`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name }),
+  });
+
+// -------- COURSE → STUDENTS MAP -------
+export const getCourseStudents = () =>
+  fetch(`${BASE_URL}/courses-students`).then((res) => res.json());
+
+// -------- COURSE → TEACHERS MAP -------
+export const getCourseTeachers = () =>
+  fetch(`${BASE_URL}/courses-teachers`).then((res) => res.json());
+
+
 
 

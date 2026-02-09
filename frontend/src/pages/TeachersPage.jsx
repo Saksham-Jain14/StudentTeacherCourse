@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from "react";
-import api from "../api/api";
+import { getTeachers, addTeacher } from "../api/api";
 
 function TeachersPage() {
   const [teachers, setTeachers] = useState([]);
   const [name, setName] = useState("");
 
-  const fetchTeachers = async () => {
-    const res = await api.get("/teachers");
-    setTeachers(res.data);
+  const loadData = async () => {
+    const data = await getTeachers();
+    setTeachers(data);
   };
 
-  const addTeacher = async () => {
-    await api.post("/teachers", { name });
+  const handleAdd = async () => {
+    await addTeacher(name);
     setName("");
-    fetchTeachers();
+    loadData();
   };
 
   useEffect(() => {
-    fetchTeachers();
+    loadData();
   }, []);
 
   return (
     <div>
       <h2>Teachers</h2>
 
-      <input 
+      <input
         placeholder="Teacher Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button onClick={addTeacher}>Add Teacher</button>
+      <button onClick={handleAdd}>Add Teacher</button>
 
       <ul>
         {teachers.map((t) => (
@@ -41,3 +41,4 @@ function TeachersPage() {
 }
 
 export default TeachersPage;
+

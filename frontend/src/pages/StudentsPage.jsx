@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from "react";
-import api from "../api/api";
+import { getStudents, addStudent } from "../api/api";
 
 function StudentsPage() {
   const [students, setStudents] = useState([]);
   const [name, setName] = useState("");
 
-  const fetchStudents = async () => {
-    const res = await api.get("/students");
-    setStudents(res.data);
+  const loadData = async () => {
+    const data = await getStudents();
+    setStudents(data);
   };
 
-  const addStudent = async () => {
-    await api.post("/students", { name });
+  const handleAdd = async () => {
+    await addStudent(name);
     setName("");
-    fetchStudents();
+    loadData();
   };
 
   useEffect(() => {
-    fetchStudents();
+    loadData();
   }, []);
 
   return (
     <div>
       <h2>Students</h2>
 
-      <input 
+      <input
         placeholder="Student Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <button onClick={addStudent}>Add Student</button>
+      <button onClick={handleAdd}>Add Student</button>
 
       <ul>
         {students.map((s) => (
