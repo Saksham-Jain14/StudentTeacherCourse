@@ -1,65 +1,27 @@
 // src/api/api.js
-const BASE_URL = "https://student-teacher-backend-1pi7.onrender.com";
+import axios from "axios";
 
-// Fetch Students
-export const getStudents = async () => {
-  const res = await fetch(`${BASE_URL}/students`);
-  return res.json();
-};
+const api = axios.create({
+  baseURL: "https://student-teacher-backend-1pi7.onrender.com",
+});
 
-// Add Student
-export const addStudent = async (name) => {
-  const res = await fetch(`${BASE_URL}/students`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name }),
-  });
-  return res.json();
-};
+// Students
+export const getStudents = () => api.get("/students");
+export const addStudent = (name) => api.post("/students", { name });
 
-// Fetch Teachers
-export const getTeachers = async () => {
-  const res = await fetch(`${BASE_URL}/teachers`);
-  return res.json();
-};
+// Teachers
+export const getTeachers = () => api.get("/teachers");
+export const addTeacher = (name) => api.post("/teachers", { name });
 
-// Add Teacher
-export const addTeacher = async (name) => {
-  const res = await fetch(`${BASE_URL}/teachers`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name }),
-  });
-  return res.json();
-};
+// Courses
+export const getCourses = () => api.get("/courses");
+export const addCourse = (name) => api.post("/courses", { name });
 
-// Fetch Courses
-export const getCourses = async () => {
-  const res = await fetch(`${BASE_URL}/courses`);
-  return res.json();
-};
+// Mappings
+export const getCourseStudents = () => api.get("/courses-students");
+export const getCourseTeachers = () => api.get("/courses-teachers");
 
-// Add Course
-export const addCourse = async (name) => {
-  const res = await fetch(`${BASE_URL}/courses`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name }),
-  });
-  return res.json();
-};
-
-// Course → Teachers Mapping
-export const fetchCourseTeachers = async () => {
-  const res = await fetch(`${BASE_URL}/courses-teachers`);
-  return res.json();
-};
-
-// Course → Students Mapping
-export const fetchCourseStudents = async () => {
-  const res = await fetch(`${BASE_URL}/courses-students`);
-  return res.json();
-};
+export default api;
 
 
 
