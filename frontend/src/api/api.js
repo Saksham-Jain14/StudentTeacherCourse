@@ -1,22 +1,34 @@
 // src/api/api.js
-import axios from "axios";
 
-// FIXED BASE URL — do NOT add /api
-const API = axios.create({
-  baseURL: "https://student-teacher-backend-1pi7.onrender.com",
-});
+const BASE_URL = "https://student-teacher-backend-1pi7.onrender.com";
 
-// Students
-export const getStudents = () => API.get("/students");
+// 🔹 Fetch all students
+export const fetchStudents = async () => {
+  const response = await fetch(`${BASE_URL}/students`);
+  return response.json();
+};
 
-// Teachers
-export const getTeachers = () => API.get("/teachers");
+// 🔹 Fetch all teachers
+export const fetchTeachers = async () => {
+  const response = await fetch(`${BASE_URL}/teachers`);
+  return response.json();
+};
 
-// Courses
-export const getCourses = () => API.get("/courses");
+// 🔹 Fetch all courses
+export const fetchCourses = async () => {
+  const response = await fetch(`${BASE_URL}/courses`);
+  return response.json();
+};
 
-// Course → Students mapping
-export const getCourseStudents = () => API.get("/courses-students");
+// 🔹 Fetch course → teachers mapping
+export const fetchCourseTeachers = async () => {
+  const response = await fetch(`${BASE_URL}/courses-teachers`);
+  return response.json();
+};
 
-// Course → Teachers mapping
-export const getCourseTeachers = () => API.get("/courses-teachers");
+// 🔹 Fetch course → students mapping
+export const fetchCourseStudents = async () => {
+  const response = await fetch(`${BASE_URL}/courses-students`);
+  return response.json();
+};
+
