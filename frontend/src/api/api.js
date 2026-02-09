@@ -1,1 +1,22 @@
-import axios from "axios";const API=axios.create({baseURL: process.env.REACT_APP_BACKEND_URL + "/api"});export const getStudents=()=>API.get("/students");export const createStudent=d=>API.post("/students",d);export const updateStudent=(i,d)=>API.put(`/students/${i}`,d);export const deleteStudent=i=>API.delete(`/students/${i}`);export const getTeachers=()=>API.get("/teachers");export const createTeacher=d=>API.post("/teachers",d);export const updateTeacher=(i,d)=>API.put(`/teachers/${i}`,d);export const deleteTeacher=i=>API.delete(`/teachers/${i}`);export const getCourses=()=>API.get("/courses");export const createCourse=d=>API.post("/courses",d);export const updateCourse=(i,d)=>API.put(`/courses/${i}`,d);export const deleteCourse=i=>API.delete(`/courses/${i}`);export const assignTeachers=(i,a)=>API.post(`/courses/${i}/assign-teachers`,{teacherIds:a});export const enrollStudents=(i,a)=>API.post(`/courses/${i}/enroll-students`,{studentIds:a});
+// src/api/api.js
+import axios from "axios";
+
+// FIXED BASE URL — do NOT add /api
+const API = axios.create({
+  baseURL: "https://student-teacher-backend-1pi7.onrender.com",
+});
+
+// Students
+export const getStudents = () => API.get("/students");
+
+// Teachers
+export const getTeachers = () => API.get("/teachers");
+
+// Courses
+export const getCourses = () => API.get("/courses");
+
+// Course → Students mapping
+export const getCourseStudents = () => API.get("/courses-students");
+
+// Course → Teachers mapping
+export const getCourseTeachers = () => API.get("/courses-teachers");
